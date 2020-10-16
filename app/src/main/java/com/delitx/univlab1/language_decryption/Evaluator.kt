@@ -29,6 +29,9 @@ class Evaluator(val item: ExcelItem, val helper: EvaluateHelper) {
         val tempSet = mutableSetOf<String>()
         for (i in dependsOn) {
             tempSet.add(i.to)
+            if(i.to==item.name){
+                throw IllegalArgumentException()
+            }
         }
         if (foundCycles(mutableSetOf(item.name), tempSet)) {
             throw IllegalArgumentException()
